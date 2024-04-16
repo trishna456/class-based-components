@@ -2,6 +2,7 @@ import { Fragment, useState, useEffect, Component } from "react";
 import Users from "./Users";
 import classes from "./UserFinder.module.css";
 import UsersContext from "../store/users-context";
+import ErrorBoundary1 from "./ErrorBoundary1";
 
 class UserFinder extends Component {
   static contextType = UsersContext; //can only use this once per component!
@@ -15,7 +16,6 @@ class UserFinder extends Component {
   }
 
   componentDidMount() {
-    console.log(this.contextType);
     //runs only once at the start
     //can send http requests and set the initial state
     this.setState({ filteredUsers: this.context.users });
@@ -42,7 +42,9 @@ class UserFinder extends Component {
         <div className={classes.finder}>
           <input type="search" onChange={this.searchChangeHandler.bind(this)} />
         </div>
-        <Users users={this.state.filteredUsers} />
+        <ErrorBoundary1>
+          <Users users={this.state.filteredUsers} />
+        </ErrorBoundary1>
       </Fragment>
     );
   }
