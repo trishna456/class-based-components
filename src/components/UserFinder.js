@@ -18,7 +18,13 @@ class UserFinder extends Component {
     };
   }
 
+  componentDidMount() {
+    //runs only once at the start
+    //can send http requests and set the initial state
+  }
+
   componentDidUpdate(prevProps, prevState) {
+    //runs everytime the components updates, we have access to the prev props and state
     if (prevState.searchTerm !== this.state.searchTerm) {
       this.setState({
         filteredUsers: DUMMY_USERS.filter((user) =>
